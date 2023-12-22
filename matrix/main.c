@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 
 // Fungsi untuk menampilkan matriks
