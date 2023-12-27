@@ -45,3 +45,40 @@ Ketika memilih alamat domain untuk soket Anda, penting untuk mempertimbangkan ke
 dan lingkungan di mana soket akan beroperasi. Sebagai contoh, jika Anda ingin berkomunikasi antara proses 
 yang berjalan di mesin yang sama tanpa melalui jaringan, maka AF_UNIX mungkin menjadi pilihan yang lebih tepat. 
 Sebaliknya, jika Anda berkomunikasi melalui jaringan, maka AF_INET atau AF_INET6 akan lebih sesuai.
+
+
+socket type 
+Dalam pemrograman soket (socket programming), setelah menentukan alamat domain atau family untuk soket, langkah selanjutnya adalah menentukan tipe soket. Tipe soket menentukan karakteristik komunikasi yang akan dilakukan oleh soket tersebut. Berikut adalah beberapa tipe soket yang umumnya digunakan:
+
+SOCK_STREAM (TCP):
+Menggunakan protokol TCP (Transmission Control Protocol).
+Menyediakan koneksi yang berorientasi pada aliran data yang dapat diandalkan dan berurutan.
+Data yang dikirim menggunakan tipe soket ini akan diterima dalam urutan yang sama dan tanpa kehilangan paket (kecuali jika terjadi kesalahan fatal).
+Biasanya digunakan untuk aplikasi yang memerlukan koneksi andal dan berkelanjutan, seperti aplikasi web (HTTP), email (SMTP, IMAP), dan transfer file (FTP).
+
+
+SOCK_DGRAM (UDP):
+Menggunakan protokol UDP (User Datagram Protocol).
+Menyediakan koneksi yang tidak berorientasi pada aliran data, yang berarti data dikirim tanpa jaminan pengiriman, urutan, atau keandalan.
+Tidak ada koneksi yang diperlukan sebelum mengirim data.
+Cocok untuk aplikasi yang memerlukan komunikasi cepat tanpa koneksi, seperti permainan online, streaming media, dan layanan pencarian.
+
+
+SOCK_RAW:
+Mengizinkan akses langsung ke protokol jaringan di tingkat raw.
+Memberikan kontrol penuh atas header paket dan data.
+Biasanya digunakan untuk pembuatan alat jaringan atau debugging, seperti pembuatan sniffer paket atau alat inspeksi paket.
+
+
+SOCK_SEQPACKET:
+Menggunakan aliran berorientasi pesan dengan mekanisme pengiriman dan konfirmasi yang mirip dengan SOCK_STREAM, tetapi dengan pesan yang berukuran tetap.
+Data dikirim dalam bentuk pesan, dan setiap pesan diterima sepenuhnya sebelum pesan berikutnya.
+Tidak terlalu umum digunakan dibandingkan dengan SOCK_STREAM atau SOCK_DGRAM.
+
+
+SOCK_RDM:
+Menyediakan akses ke protokol yang mendukung koneksi yang berorientasi pesan dengan mekanisme pengiriman dan konfirmasi.
+Namun, tipe ini sekarang jarang digunakan dan telah dianggap tidak stabil di beberapa sistem.
+
+
+Ketika memilih tipe soket untuk aplikasi Anda, Anda harus mempertimbangkan karakteristik dan kebutuhan komunikasi aplikasi tersebut. Misalnya, jika aplikasi Anda memerlukan koneksi yang andal dan urutan data yang terjaga, maka SOCK_STREAM (TCP) mungkin menjadi pilihan yang lebih baik. Sebaliknya, jika aplikasi Anda lebih toleran terhadap hilangnya beberapa paket data atau memerlukan komunikasi yang lebih cepat tanpa koneksi, maka SOCK_DGRAM (UDP) mungkin lebih sesuai.
