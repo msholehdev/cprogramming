@@ -48,6 +48,7 @@ Sebaliknya, jika Anda berkomunikasi melalui jaringan, maka AF_INET atau AF_INET6
 
 
 socket type 
+
 Dalam pemrograman soket (socket programming), setelah menentukan alamat domain atau family untuk soket, langkah selanjutnya adalah menentukan tipe soket. Tipe soket menentukan karakteristik komunikasi yang akan dilakukan oleh soket tersebut. Berikut adalah beberapa tipe soket yang umumnya digunakan:
 
 SOCK_STREAM (TCP):
@@ -82,3 +83,35 @@ Namun, tipe ini sekarang jarang digunakan dan telah dianggap tidak stabil di beb
 
 
 Ketika memilih tipe soket untuk aplikasi Anda, Anda harus mempertimbangkan karakteristik dan kebutuhan komunikasi aplikasi tersebut. Misalnya, jika aplikasi Anda memerlukan koneksi yang andal dan urutan data yang terjaga, maka SOCK_STREAM (TCP) mungkin menjadi pilihan yang lebih baik. Sebaliknya, jika aplikasi Anda lebih toleran terhadap hilangnya beberapa paket data atau memerlukan komunikasi yang lebih cepat tanpa koneksi, maka SOCK_DGRAM (UDP) mungkin lebih sesuai.
+
+
+socket protocol
+
+Dalam pemrograman soket, setelah menentukan alamat domain (family) dan tipe soket, langkah berikutnya adalah menentukan protokol untuk soket tersebut. Protokol ini menentukan aturan komunikasi yang akan diikuti oleh soket. Meskipun banyak aplikasi tidak perlu secara eksplisit menentukan protokol (karena soket akan memilih protokol default yang sesuai dengan tipe soket dan alamat domain yang ditentukan), pemahaman tentang beberapa protokol yang umumnya digunakan bisa sangat berguna. Berikut adalah beberapa protokol yang sering digunakan dalam pemrograman soket:
+
+TCP (Transmission Control Protocol):
+Protokol ini berorientasi pada koneksi dan menyediakan aliran data yang andal antara dua entitas.
+Menjamin pengiriman data dalam urutan yang sama, tanpa duplikasi, dan dengan pemulihan kesalahan jika diperlukan.
+Dapat digunakan bersama SOCK_STREAM untuk memastikan komunikasi yang stabil dan terorganisir.
+
+
+UDP (User Datagram Protocol):
+Protokol ini berorientasi pada pesan dan menyediakan komunikasi tanpa koneksi (connectionless) dan tidak terjamin.
+Tidak menjamin pengiriman data dalam urutan yang sama atau pemulihan kesalahan.
+Dapat digunakan bersama SOCK_DGRAM untuk komunikasi yang lebih cepat dan tanpa koneksi.
+
+
+ICMP (Internet Control Message Protocol):
+Protokol ini digunakan untuk mengirim pesan kesalahan dan informasi pengendali di jaringan IP.
+Umumnya digunakan oleh perangkat jaringan untuk mengirim pesan kesalahan, seperti "host tidak dapat dijangkau" atau "time exceeded".
+IGMP (Internet Group Management Protocol):
+
+Protokol ini digunakan oleh perangkat dalam jaringan multicast untuk mengatur dan mengelola grup multicast.
+
+RAW:
+Dalam konteks soket, "RAW" merujuk pada kemampuan untuk mengakses protokol jaringan di tingkat raw, yang memungkinkan kontrol penuh atas header paket dan data.
+Biasanya digunakan untuk pembuatan alat jaringan khusus atau debugging.
+Others:
+
+Ada banyak protokol lain yang bisa digunakan dengan soket, terutama jika Anda berada di lingkungan jaringan yang khusus atau menggunakan teknologi yang spesifik.
+Penting untuk dicatat bahwa, dalam banyak kasus, Anda tidak perlu secara eksplisit menentukan protokol saat membuat soket. Sebagai gantinya, Anda dapat membiarkan sistem operasi memilih protokol default yang sesuai dengan tipe soket dan alamat domain yang Anda tentukan. Namun, pemahaman tentang berbagai protokol ini penting untuk pemrograman soket yang lebih canggih atau spesifik.
