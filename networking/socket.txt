@@ -115,3 +115,28 @@ Others:
 
 Ada banyak protokol lain yang bisa digunakan dengan soket, terutama jika Anda berada di lingkungan jaringan yang khusus atau menggunakan teknologi yang spesifik.
 Penting untuk dicatat bahwa, dalam banyak kasus, Anda tidak perlu secara eksplisit menentukan protokol saat membuat soket. Sebagai gantinya, Anda dapat membiarkan sistem operasi memilih protokol default yang sesuai dengan tipe soket dan alamat domain yang Anda tentukan. Namun, pemahaman tentang berbagai protokol ini penting untuk pemrograman soket yang lebih canggih atau spesifik.
+
+
+
+Mari kita jelaskan perbedaan antara pendekatan connection-oriented dan connectionless dalam konteks soket:
+
+Connection-Oriented:
+Perbedaan: Dalam pendekatan connection-oriented, sebelum data dikirim antara dua pihak, koneksi (atau sesi) harus didirikan terlebih dahulu. Setelah koneksi berhasil dibuat, data dapat dikirim antara dua pihak, dan koneksi tersebut dijaga agar tetap terbuka hingga kedua pihak sepakat untuk menutupnya.
+
+Protokol yang Digunakan: Protokol yang umumnya digunakan untuk pendekatan ini adalah TCP (Transmission Control Protocol). TCP menawarkan koneksi andal dan berurutan antara dua pihak dengan mekanisme pengiriman dan konfirmasi.
+
+Family & Type: Biasanya, untuk TCP, kita menggunakan AF_INET (untuk IPv4) atau AF_INET6 (untuk IPv6) untuk family alamat. Tipe soket yang digunakan adalah SOCK_STREAM.
+
+Connectionless:
+Perbedaan: Dalam pendekatan connectionless, setiap pesan dikirim sebagai unit mandiri tanpa perlu membangun atau mempertahankan koneksi terbuka. Pesan-pesan ini dikirimkan ke tujuan tanpa perlu konfirmasi atau jaminan pengiriman.
+
+Protokol yang Digunakan: Protokol yang sering digunakan dalam pendekatan ini adalah UDP (User Datagram Protocol). UDP adalah protokol tanpa koneksi yang tidak menjamin pengiriman data dalam urutan atau keandalan.
+
+Family & Type: Untuk UDP, kita juga menggunakan AF_INET atau AF_INET6 untuk family alamat. Tipe soket yang digunakan adalah SOCK_DGRAM.
+
+Ringkasan:
+Connection-Oriented: Memerlukan pembangunan koneksi terlebih dahulu sebelum data dikirim. Protokol yang digunakan adalah TCP. Family & type biasanya AF_INET dan SOCK_STREAM.
+
+Connectionless: Tidak memerlukan koneksi terlebih dahulu; setiap pesan dikirim sebagai unit mandiri. Protokol yang digunakan adalah UDP. Family & type biasanya AF_INET dan SOCK_DGRAM.
+
+Pilihan antara pendekatan connection-oriented dan connectionless harus didasarkan pada kebutuhan aplikasi Anda. Jika Anda memerlukan keandalan dan pengiriman data yang dijamin, pendekatan connection-oriented dengan TCP mungkin lebih cocok. Namun, jika Anda memerlukan kecepatan dan tidak memerlukan jaminan pengiriman atau urutan, pendekatan connectionless dengan UDP mungkin lebih sesuai.
